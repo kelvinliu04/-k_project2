@@ -84,9 +84,10 @@ class ObjectDetectorJson:
       images_id_to_name_map[image_id] = image
 
       image = images_id_to_name_map[image_id]
-      im_path = image['image']
-      if not os.path.isabs(im_path):
-        im_path = os.path.join(annotation_directory, im_path)
+      #im_path = image['image']
+      #if not os.path.isabs(im_path):
+        #im_path = os.path.join(annotation_directory, im_path)
+      im_path = ''
       image_size = [image['width'], image['height']]
 
       converted_annotations[image_id] = {'image_id': image_id,

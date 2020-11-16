@@ -25,7 +25,7 @@ ROOT_DIR = os.path.normpath(os.path.join(CURRENT_DIR, "../../.."))
 
 # See more details about parameters in TensorFlow documentation tf.estimator
 class train:
-  annotation_path = os.path.join(ROOT_DIR, "./coco/train/train.json")  # Path to the annotation file
+  annotation_path = os.path.join(ROOT_DIR, "object_detection/-k_project2/coco/train/train.json")  # Path to the annotation file
   cache_type = "ENCODED"  # Type of data to save in memory, possible options: 'FULL', 'ENCODED', 'NONE'
 
   batch_size = 32                    # Number of images in the batch
@@ -51,8 +51,8 @@ class train:
 
 class eval:
   annotation_path = {
-    "train": os.path.join(ROOT_DIR, "./coco/train/train.json"),
-    "test": os.path.join(ROOT_DIR, "./coco/val/val.json")
+    "train": os.path.join(ROOT_DIR, "object_detection/-k_project2/coco/train/train.json"),
+    "test": os.path.join(ROOT_DIR, "object_detection/-k_project2/coco/val/val.json")
   }  # Dictionary with paths to annotations and its short names which will be displayed in the TensorBoard
   datasets = ["train", "test"]  # List of names from annotation_path dictionary on which evaluation will be launched
   vis_num = 2                  # Select random images for visualization in the TensorBoard
