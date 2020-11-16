@@ -1,27 +1,31 @@
-"""Setup script for object_detection with TF1.0."""
+#!/usr/bin/env python3
+#
+# Copyright (C) 2019 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+
 import os
-from setuptools import find_packages
 from setuptools import setup
 
-REQUIRED_PACKAGES = ['pillow', 'lxml', 'matplotlib', 'Cython',
-                     'contextlib2', 'tf-slim', 'six', 'pycocotools', 'scipy',
-                     'pandas']
+with open('./requirements.txt') as f:
+  REQUIRED = f.read().splitlines()
+
+# Under the Travis-CI we have to use a CPU version
+if os.environ.get('CPU_ONLY', None) == 'true':
+  REQUIRED = [p.replace('-gpu', '') if p.startswith('tensorflow') else p for p in REQUIRED]
 
 setup(
-    name='object_detection',
-    version='0.1',
-    install_requires=REQUIRED_PACKAGES,
-    include_package_data=True,
-    packages=(
-        [p for p in find_packages() if p.startswith('object_detection')] +
-        find_packages(where=os.path.join('.', 'slim'))),
-    package_dir={
-        'datasets': os.path.join('slim', 'datasets'),
-        'nets': os.path.join('slim', 'nets'),
-        'preprocessing': os.path.join('slim', 'preprocessing'),
-        'deployment': os.path.join('slim', 'deployment'),
-        'scripts': os.path.join('slim', 'scripts'),
-    },
-    description='Tensorflow Object Detection Library with TF1.0',
-    python_requires='>3.6',
+  name='ssd_detector',
+  version='0.2.2.dev0',
+  install_requires=REQUIRED
 )
